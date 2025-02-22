@@ -1,0 +1,8 @@
+# Ignorer les fichiers de node_modules
+node_modules/
+
+# Ignorer les fichiers système comme desktop.ini
+desktop.ini
+
+# Ignorer les fichiers d'environnement et autres fichiers de configuration
+.env
