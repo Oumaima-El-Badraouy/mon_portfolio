@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>Oumaima el badraouy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uicons/2.0.1/css/uicons-regular-rounded.min.css">
@@ -61,6 +62,12 @@ https://www.tooplate.com/view/2115-marvel
                     <li class="nav-item">
                         <a href="#contact" class="nav-link"><span data-hover="Contact">Contact</span></a>
                     </li>
+                    <li class="nav-item">
+                      <a href="#Profil" class="nav-link"><span data-hover="Profil">Profil</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#Certificates" class="nav-link"><span data-hover="Certificates">Certificates</span></a>
+                </li>
                 </ul>
 
                 <ul class="navbar-nav ml-lg-auto">
@@ -78,38 +85,145 @@ https://www.tooplate.com/view/2115-marvel
     <!-- ABOUT -->
     <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
       <div class="container">
-          <div class="row">
+        <div class="row">
+          <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+            <div class="about-text">
+              <small class="small-text">Welcome to <span class="mobile-block">my portfolio website!</span></small>
+              <h1 class="animated animated-text">
+                <span class="mr-2">Hello World!, I'm  
+                  <div class="animated-info">
+                    <span class="animated-item">Oumaima El Badraouy</span>
+                  </div>
+                </span>
+              </h1>
+              <p>I am passionate about creating solutions through web development. From building dynamic websites to integrating innovative systems, I strive to provide users with the best experience.</p>
               
-              <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
-                  <div class="about-text">
-                      <small class="small-text">Welcome to <span class="mobile-block">my portfolio website!</span></small>
-                      <h1 class="animated animated-text">
-                          <span class="mr-2">Hello World!, I'm    <div class="animated-info">
-                            <span class="animated-item">Oumaima El Badraouy</span>
-                        </div></span>
-                           
-                      </h1>
-  
-                      <p>I am passionate about creating solutions through web development. From building dynamic websites to integrating innovative systems, I strive to provide users with the best experience.</p>
-                      
-                      <div class="custom-btn-group mt-4">
-                        <a href="#" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download Resume</a>
-                        <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a>
-                      </div>
-                  </div>
+              <div class="custom-btn-group mt-4"id="downloadBtn">
+                <a class="btn mr-lg-2 custom-btn" ><i class='uil uil-file-alt'> Download Resume</i></a>
+                <script>
+                  document.getElementById("downloadBtn").addEventListener("click", async function() {
+                      try {
+                          const response = await fetch("http://localhost:3000/download-cv"); // Corriger l'URL ici
+                          if (!response.ok) {
+                              throw new Error("Erreur lors du téléchargement du fichier");
+                          }
+    
+                          const blob = await response.blob();
+                          const url = window.URL.createObjectURL(blob);
+    
+                          const a = document.createElement("a");
+                          a.href = url;
+                          a.download = "cv.pdf"; 
+                          document.body.appendChild(a);
+                          a.click();
+    
+                          document.body.removeChild(a);
+                          window.URL.revokeObjectURL(url);
+                      } catch (error) {
+                          console.error("Erreur :", error);
+                      }
+                  });
+                </script>
+                <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a>
               </div>
+            </div>
+          </div>
+    
+          <div class="col-lg-5 col-md-12 col-12">
+            <div class="about-image svg">
+              <img src="images/undraw/pvr.png" class="img-fluid" alt="svg image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
   
-              <div class="col-lg-5 col-md-12 col-12">
-                  <div class="about-image svg">
-                      <img src="images/undraw/pvr.png" class="img-fluid" alt="svg image">
-                  </div>
-              </div>
-  
+<!-- ABOUT ME -->
+<section class="Profil py-5 d-flex align-items-center" id="Profil">
+  <div class="container">
+      <div class="row align-items-center">
+          <!-- Image -->
+          <div class="col-lg-5 text-center">
+              <img src="images/project/dal.png" class="img-fluid rounded-circle shadow-lg" alt="About Me">
+          </div>
+
+          <!-- Description -->
+          <div class="col-lg-7"id="Profil">
+              <h2 class="mb-4">About Me</h2>
+              <p class="lead">I am a passionate Full-Stack Developer specializing in web and backend technologies. I love solving problems and bringing creative ideas to life through code.</p>
+              <p>With experience in various programming languages and frameworks, I enjoy working on challenging projects that push my skills further.</p>
+              <ul class="list-unstyled mt-4">
+                  <li><strong>📍 Location:</strong> Morocco</li>
+                  <li><strong>💻 Skills:</strong> React, Java, Node.js, Express, PHP, Laravel, Python</li>
+                  <li><strong>🎯 Passion:</strong> Web Development & AI</li>
+              </ul>
           </div>
       </div>
-  </section>
-  
+  </div>
+</section>
 
+
+<!-- New Section: Certificats avec Owl Carousel -->
+<section class="Certificates py-5" id="certificates"style="width: 100%; /* Ajuste la taille selon ton besoin (50%, 70%, etc.) */
+max-width: 800px; /* Empêche l'image de devenir trop grande */
+height: auto; /* Garde les proportions originales */
+display: block;
+margin: 0 auto; /* Centre les images */
+border-radius: 10px ">>
+  <div class="container">
+      <div class="row text-center">
+          <div class="col-lg-12">
+              <h2 class="mb-4">My Certifications</h2>
+              <p class="lead">Here are some of the certifications I have earned to enhance my skills in web development and related fields.</p>
+          </div>
+      </div>
+
+      <!-- Owl Carousel -->
+       
+      <div class="owl-carousel owl-theme">
+          <!-- Certification 1 -->
+          <div class="item">
+              <div class="card">
+                  <img src="images/certificates/python1.png" class="card-img-top" alt="Certification 1">
+                  <div class="card-body">
+                      <h5 class="card-title">Cisco Python 1</h5>
+                      <p class="card-text">A certification covering the fundamentals of Python programming.</p>
+                  </div>
+              </div>
+          </div>
+          <!-- Certification 2 -->
+          <div class="item">
+              <div class="card">
+                  <img src="images/certificates/js1.png" class="card-img-top" alt="Certification 2">
+                  <div class="card-body">
+                      <h5 class="card-title">JavaScript Basics</h5>
+                      <p class="card-text">A certification focused on JavaScript fundamentals and application.</p>
+                  </div>
+              </div>
+          </div>
+          <!-- Certification 3 -->
+          <div class="item">
+              <div class="card">
+                  <img src="images/certificates/computer.png" class="card-img-top" alt="Certification 3">
+                  <div class="card-body">
+                      <h5 class="card-title">Computer Hardware</h5>
+                      <p class="card-text">An introduction to computer hardware and system components.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="item">
+            <div class="card">
+                <img src="images/certificates/cybersecurité.png" class="card-img-top" alt="Certification 3">
+                <div class="card-body">
+                    <h5 class="card-title">CyberSecurity</h5>
+                    <p class="card-text">An introduction to CyberSecurity .</p>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+</section>
     <!-- PROJECTS -->
     <section class="project py-5" id="project">
         <div class="container">
@@ -242,6 +356,7 @@ https://www.tooplate.com/view/2115-marvel
   </section>
   
 
+
     <!-- CONTACT -->
     <section class="contact py-5" id="contact"class="contactForm">
       <div class="container">
@@ -249,9 +364,8 @@ https://www.tooplate.com/view/2115-marvel
           
           <div class="col-lg-5 mr-lg-5 col-12">
             <div class="google-map w-100">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12088.558402180099!2d-73.99373482142036!3d40.75895421922642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855b8fb3083%3A0xa0f9aef176042a5c!2sTheater+District%2C+New+York%2C+NY%2C+USA!5e0!3m2!1sen!2smm!4v1549875377188" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26631.296027409127!2d-7.496808969227314!3d33.451599053974135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda636cb8eec4f75%3A0xc78a7773a98283f!2z2YXYr9mK2YjZhtip!5e0!3m2!1sar!2sma!4v1740342348223!5m2!1sar!2sma"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
-
             <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
                 <div class="contact-info-item">
                   <h3 class="mb-3 text-white">Say hello</h3>
@@ -304,13 +418,14 @@ https://www.tooplate.com/view/2115-marvel
 
                     <div class="col-lg-12 col-12">                                
                         <p class="copyright-text text-center">Copyright &copy; 2025 OUMAIMA EL BADRAOUY. All rights reserved</p>
-                        <p class="copyright-text text-center">Designed by <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+                        <p class="copyright-text text-center">Designed by <a rel="nofollow">OUmaima el Badraouy</a></p>
                     </div>
                     
                </div>
           </div>
      </footer>
      <script>
+      
       document.getElementById("contactForm").addEventListener("submit", async function (event) {
         event.preventDefault();
     
@@ -320,16 +435,38 @@ https://www.tooplate.com/view/2115-marvel
           message: document.getElementById("message").value
         };
     
-        const response = await fetch("http://localhost:5000/submit-form", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
+        try {
+          const response = await fetch("http://localhost:3000/submit-form", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+          });
     
-        const data = await response.json();
-        alert(data.message);
+          const data = await response.json();
+    
+          if (response.ok) {
+            Swal.fire({
+              icon: "success",
+              title: "Message envoyé !",
+              text: data.message,
+              confirmButtonColor: "#3085d6"
+            });
+    
+            document.getElementById("contactForm").reset(); // Réinitialise le formulaire
+          } else {
+            throw new Error(data.message);
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Erreur",
+            text: "Une erreur est survenue. Réessayez plus tard.",
+            confirmButtonColor: "#d33"
+          });
+        }
       });
     </script>
+    
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
