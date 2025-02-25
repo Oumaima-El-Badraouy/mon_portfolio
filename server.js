@@ -9,12 +9,14 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-
+require("dotenv").config();
+console.log("MONGO_URI:", process.env.MONGO_URI);
 // Connexion à MongoDB
 mongoose
-.connect(process.env.MONGO_URI, { 
+.connect("mongodb+srv://user:0000@cluster0.dchqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { 
   useNewUrlParser: true, 
-  useUnifiedTopology: true })
+  useUnifiedTopology: true 
+})
 
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
