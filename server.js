@@ -5,6 +5,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
+app.use(express.static(path.join(__dirname, "mon_portfolio")));
+
 // app.use("/images", express.static(path.join(__dirname, 'images')));
 // app.use("/css", express.static(path.join(__dirname, 'css')));
 // app.use("/font", express.static(path.join(__dirname, 'font')));
