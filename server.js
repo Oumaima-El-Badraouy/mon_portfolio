@@ -38,6 +38,9 @@ app.get("/download-cv", (req, res) => {
       }
   });
 });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.post("/submit-form", async (req, res) => {
   try {
     const { name, email, message } = req.body;
