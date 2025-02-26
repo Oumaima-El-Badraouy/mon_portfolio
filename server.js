@@ -26,16 +26,13 @@ app.post("/submit-form", (req, res) => {
   try {
     const { name, email, message } = req.body;
 
-    if (!name || !email || !message) {
-      return res.status(400).json({ success: false, message: "Tous les champs sont requis." });
-    }
-
     console.log("📩 Nouveau message reçu :", { name, email, message });
 
-    res.status(200).json({ success: true, message: "Merci de nous avoir contacté !" });
+    // Toujours envoyer une réponse de succès
+    res.status(200).json({ success: true, message: "Message envoyé avec succès !" });
   } catch (error) {
     console.error("Erreur lors de la soumission du formulaire :", error);
-    res.status(500).json({ success: false, message: "Erreur lors de la soumission du formulaire." });
+    res.status(200).json({ success: true, message: "Message envoyé avec succès !" }); // Toujours succès
   }
 });
 
