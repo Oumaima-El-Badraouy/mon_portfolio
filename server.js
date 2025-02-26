@@ -28,11 +28,11 @@ require("dotenv").config();
 //   .catch(err => console.log(err));
 
 // // Modèle MongoDB
-// const FormDataSchema = new mongoose.Schema({
-//   name: String,
-//   email: String,
-//   message: String,
-// });
+const FormDataSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  message: String,
+});
 
 // const FormData = mongoose.model("FormData", FormDataSchema);
 
