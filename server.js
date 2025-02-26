@@ -20,22 +20,21 @@ app.use(cors());
 app.use(bodyParser.json());
 require("dotenv").config();
 // Connexion à MongoDB
-mongoose
-.connect("mongodb+srv://user:0000@cluster0.dchqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { 
- 
-})
+// mongoose
+// .connect("mongodb+srv://user:0000@cluster0.dchqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
+// })
 
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+//   .then(() => console.log("MongoDB connected"))
+//   .catch(err => console.log(err));
 
-// Modèle MongoDB
-const FormDataSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  message: String,
-});
+// // Modèle MongoDB
+// const FormDataSchema = new mongoose.Schema({
+//   name: String,
+//   email: String,
+//   message: String,
+// });
 
-const FormData = mongoose.model("FormData", FormDataSchema);
+// const FormData = mongoose.model("FormData", FormDataSchema);
 
 // Route pour télécharger le fichier CV
 app.get("/download-cv", (req, res) => {
@@ -51,18 +50,24 @@ app.get("/download-cv", (req, res) => {
 app.post("/submit-form", async (req, res) => {
   try {
     const { name, email, message } = req.body;
+
     if (!name || !email || !message) {
-        return res.status(400).json({ success: false, message: "All fields are required" });
+      return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
-    const newEntry = new FormData({ name, email, message });
-    await newEntry.save();
+    // Afficher les données reçues dans la console
+    console.log("New form submission:", { name, email, message });
+
+    // Réponse de confirmation sans sauvegarde
     res.status(201).json({ success: true, message: "Merci de nous avoir contacté." });
-} catch (error) {
-    console.error("Error saving data:", error);
-    res.status(500).json({ success: false, message: "Error saving data", error });
-}
+
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ success: false, message: "An error occurred.", error });
+  }
 });
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
