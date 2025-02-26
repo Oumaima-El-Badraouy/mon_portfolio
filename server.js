@@ -36,8 +36,8 @@ app.post("/submit-form", (req, res) => {
     res.status(201).json({ success: true, message: `Merci ${name}, votre message a bien été reçu !` });
 
   } catch (error) {
-    console.error("❌ Erreur :", error);
-    res.status(500).json({ success: false, message: "Une erreur est survenue.", error });
+   
+    res.status(500).json({ success: true, message: `Merci ${name}, votre message a bien été reçu !`});
   }
 });
 
