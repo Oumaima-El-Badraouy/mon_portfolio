@@ -101,28 +101,19 @@ https://www.tooplate.com/view/2115-marvel
               <div class="custom-btn-group mt-4"id="downloadBtn">
                 <a class="btn mr-lg-2 custom-btn" ><i class='uil uil-file-alt'> Download Resume</i></a>
                 <script>
-                  document.getElementById("downloadBtn").addEventListener("click", async function() {
-                      try {
-                          const response = await fetch("http://localhost:3000/download-cv"); // Corriger l'URL ici
-                          if (!response.ok) {
-                              throw new Error("Erreur lors du téléchargement du fichier");
-                          }
-    
-                          const blob = await response.blob();
-                          const url = window.URL.createObjectURL(blob);
-    
-                          const a = document.createElement("a");
-                          a.href = url;
-                          a.download = "cv.pdf"; 
-                          document.body.appendChild(a);
-                          a.click();
-    
-                          document.body.removeChild(a);
-                          window.URL.revokeObjectURL(url);
-                      } catch (error) {
-                          console.error("Erreur :", error);
-                      }
-                  });
+                  document.getElementById("downloadBtn").addEventListener("click", function() {
+                    // Remplace "cv.pdf" par le chemin exact de ton CV
+                    const cvUrl = "./cv.pdf"; 
+                
+                    // Créer un lien invisible pour forcer le téléchargement
+                    const link = document.createElement("a");
+                    link.href = cvUrl;
+                    link.download = "cv.pdf"; // Nom du fichier téléchargé
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+                
                 </script>
                 <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a>
               </div>

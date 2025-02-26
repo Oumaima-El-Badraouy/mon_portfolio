@@ -5,15 +5,16 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
-app.use(express.static(path.join(__dirname, "mon_portfolio")));
-app.use(express.static(path.join(__dirname, "server.js")));
-app.use(express.static(path.join(__dirname, "cv.pdf")));
-app.use(express.static(path.join(__dirname, "node_modules")));
-app.use("/images", express.static(path.join(__dirname, 'images')));
-app.use("/css", express.static(path.join(__dirname, 'css')));
-app.use("/font", express.static(path.join(__dirname, 'font')));
-app.use("/js", express.static(path.join(__dirname, 'js')));
-app.use("/sass", express.static(path.join(__dirname, 'sass')));
+// app.use(express.static(path.join(__dirname, "mon_portfolio")));
+// app.use(express.static(path.join(__dirname, "server.js")));
+// app.use(express.static(path.join(__dirname, "cv.pdf")));
+// app.use(express.static(path.join(__dirname, "node_modules")));
+// app.use("/images", express.static(path.join(__dirname, 'images')));
+// app.use("/css", express.static(path.join(__dirname, 'css')));
+// app.use("/font", express.static(path.join(__dirname, 'font')));
+// app.use("/js", express.static(path.join(__dirname, 'js')));
+// app.use("/sass", express.static(path.join(__dirname, 'sass')));
+app.use(express.static(path.join(__dirname, "public")));
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -46,9 +47,7 @@ app.get("/download-cv", (req, res) => {
       }
   });
 });
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+
 app.post("/submit-form", async (req, res) => {
   try {
     const { name, email, message } = req.body;
