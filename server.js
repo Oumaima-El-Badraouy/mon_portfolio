@@ -1,62 +1,68 @@
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
-
 const app = express();
-
-// Servir les fichiers statiques (CSS, JS, Images, etc.)
+// app.use(express.static(path.join(__dirname, "mon_portfolio")));
+// app.use(express.static(path.join(__dirname, "server.js")));
+// app.use(express.static(path.join(__dirname, "cv.pdf")));
+// app.use(express.static(path.join(__dirname, "node_modules")));
+// app.use("/images", express.static(path.join(__dirname, 'images')));
+// app.use("/css", express.static(path.join(__dirname, 'css')));
+// app.use("/font", express.static(path.join(__dirname, 'font')));
+// app.use("/js", express.static(path.join(__dirname, 'js')));
+// app.use("/sass", express.static(path.join(__dirname, 'sass')));
 app.use(express.static(path.join(__dirname, "public")));
-
-
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+require("dotenv").config();
+// Connexion à MongoDB
+mongoose
+.connect("mongodb+srv://user:0000@cluster0.dchqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { 
+ 
+})
 
-// Stockage temporaire des soumissions (simule une DB en mémoire)
-let formSubmissions = [];
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
 
-// 📥 Route pour soumettre le formulaire
-app.post("/submit-form", (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ success: false, message: "All fields are required" });
-    }
-
-    // Ajouter les données dans le tableau temporaire
-    formSubmissions.push({ name, email, message });
-
-    console.log("📩 Nouvelle soumission :", { name, email, message });
-
-    // Réponse de succès avec message
-    res.status(201).json({ success: true, message: `Merci ${name}, votre message a bien été reçu !` });
-
-  } catch (error) {
-   
-    res.status(500).json({ success: true, message: `Merci ${name}, votre message a bien été reçu !`});
-  }
+// Modèle MongoDB
+const FormDataSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  message: String,
 });
 
-// 📄 Route pour télécharger le CV
+const FormData = mongoose.model("FormData", FormDataSchema);
+
+// Route pour télécharger le fichier CV
 app.get("/download-cv", (req, res) => {
   const filePath = path.join(__dirname, "cv.pdf");
   res.download(filePath, "cv.pdf", (err) => {
-    if (err) {
-      console.error("❌ Erreur lors du téléchargement du fichier :", err);
-      res.status(500).send("Erreur lors du téléchargement du fichier.");
-    }
+      if (err) {
+          console.error("Erreur lors du téléchargement du fichier :", err);
+          res.status(500).send("Erreur lors du téléchargement du fichier.");
+      }
   });
 });
 
-// 🎯 Route pour voir les soumissions (juste pour vérifier en dev)
-app.get("/submissions", (req, res) => {
-  res.json(formSubmissions);
+app.post("/submit-form", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+    if (!name || !email || !message) {
+        return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    const newEntry = new FormData({ name, email, message });
+    await newEntry.save();
+    res.status(201).json({ success: true, message: "Merci de nous avoir contacté." });
+} catch (error) {
+    console.error("Error saving data:", error);
+    res.status(500).json({ success: false, message: "Error saving data", error });
+}
 });
 
-// 🔥 Démarrer le serveur
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
