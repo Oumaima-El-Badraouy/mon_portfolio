@@ -330,7 +330,7 @@ b, strong {
 }
 .timeline-wrapper:before {
   content: "";
-  background: #474559;
+  background: #e87407;
   width: 3px;
   height: 100%;
   position: absolute;
@@ -338,7 +338,7 @@ b, strong {
 }
 
 .timeline-yr {
-  background: #474559;
+  background:#e87407;
   border-radius: 100%;
   position: absolute;
   width: 75px;
