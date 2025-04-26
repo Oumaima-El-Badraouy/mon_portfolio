@@ -125,49 +125,12 @@ b, strong {
 .animated-item {
   font-size: 38px;
   line-height: inherit;
-  display: block;
-  opacity: 0;
+ 
   overflow: hidden;
-  position: relative; 
-  top: 0;
-  right: 0;
-  left: 0;
-  animation: BottomTotop 7s linear infinite 0s;
-}
-.animated-item:nth-child(2n+2) {
-  animation-delay: 1s;
-}
-.animated-item:nth-child(3n+3) {
-  animation-delay: 1s;
+
 }
 
-@keyframes BottomTotop {
-  0% {
-    opacity: 0;
-  }
-  5% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  10% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  25% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  30% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+
 .navbar {
   position: fixed;
   top: 0;
